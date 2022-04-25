@@ -13,8 +13,15 @@
   }
 }
 
+input {
+  color: white !important;
+}
+
+.textfield_label {
+  color: black !important;
+}
+
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
