@@ -70,7 +70,7 @@ const getFriendListLeaderBoard = (friendList, tableData, setTableData) => {
 
   const config = {
     method: 'post',
-    url: 'https://leetboard.herokuapp.com/friends',
+    url: 'https://leetboard-backend.herokuapp.com/friends',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -94,7 +94,7 @@ const getGlobalLeaderBoard = (
 ) => {
   const config = {
     method: 'get',
-    url: 'https://leetboard.herokuapp.com/global',
+    url: 'https://leetboard-backend.herokuapp.com/global',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -118,7 +118,7 @@ const getGlobalLeaderBoard = (
 const getContest = (contestDetails, setContestDetails) => {
   var config = {
     method: 'get',
-    url: 'https://leetboard.herokuapp.com/contest',
+    url: 'https://leetboard-backend.herokuapp.com/contest',
   };
 
   axios(config)
