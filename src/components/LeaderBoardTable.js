@@ -7,9 +7,10 @@ import {
   TableRow,
   TableCell,
 } from '@mui/material';
+import moment from 'moment';
 import React from 'react';
 
-export function LeaderBoardTable({ tableData }) {
+export function LeaderBoardTable({ tableData, contestDetails }) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label='simple table'>
@@ -34,9 +35,15 @@ export function LeaderBoardTable({ tableData }) {
               <TableCell>{row.rank}</TableCell>
               <TableCell>{row.username}</TableCell>
               <TableCell>{row.score}</TableCell>
-              <TableCell>{row.finish_time}</TableCell>
+              <TableCell>
+                {getDuration(row.finish_time, contestDetails.startTime)}
+              </TableCell>
               {Object.entries(row.submissions).map(([id, submission]) => {
-                return <TableCell key={id}>{submission.date}</TableCell>;
+                let duration = getDuration(
+                  submission.date,
+                  contestDetails.startTime
+                );
+                return <TableCell key={id}>{duration}</TableCell>;
               })}
             </TableRow>
           ))}
@@ -45,3 +52,12 @@ export function LeaderBoardTable({ tableData }) {
     </TableContainer>
   );
 }
+
+const getDuration = (submissionUnixTime, contestStartUnixTime) => {
+  let contestStartTime = moment.unix(contestStartUnixTime);
+  let submissionTime = moment.unix(submissionUnixTime);
+  let duration = moment
+    .utc(submissionTime.diff(contestStartTime))
+    .format('HH:mm:ss');
+  return duration;
+};

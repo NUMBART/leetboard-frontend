@@ -14,16 +14,47 @@ function App() {
   const [tableData, setTableData] = React.useState([]);
   const [contestDetails, setContestDetails] = React.useState({ title: '' });
   const [friendList, setFriendList] = React.useState({});
+  const [boardType, setBoardType] = React.useState('global');
+  const [globalPageNumber, setGlobalPageNumber] = React.useState(1);
+  const [globalPageCount, setGlobalPageCount] = React.useState(1);
+  const getLeaderBoard = {
+    friends: () =>
+      getFriendListLeaderBoard(friendList, tableData, setTableData),
+    global: () =>
+      getGlobalLeaderBoard(
+        globalPageNumber,
+        setGlobalPageCount,
+        tableData,
+        setTableData
+      ),
+    country: () =>
+      getGlobalLeaderBoard(
+        globalPageNumber,
+        setGlobalPageCount,
+        tableData,
+        setTableData
+      ),
+  };
   getContest(contestDetails, setContestDetails);
-  getLeaderBoard(friendList, tableData, setTableData);
-  const paperStyle = { padding: 20, height: '100vh' };
+  getLeaderBoard[boardType]();
   return (
     <Grid className='App'>
       <Grid>
-        <Paper elevation={10} style={paperStyle}>
+        <Paper elevation={10} style={{ padding: 20, minHeight: '100vh' }}>
           <ContestTitle contestDetails={contestDetails} />
-          <InputPanel friendList={friendList} setFriendList={setFriendList} />
-          <LeaderBoardTable tableData={tableData} />
+          <InputPanel
+            friendList={friendList}
+            setFriendList={setFriendList}
+            boardType={boardType}
+            setBoardType={setBoardType}
+            globalPageNumber={globalPageNumber}
+            setGlobalPageNumber={setGlobalPageNumber}
+            globalPageCount={globalPageCount}
+          />
+          <LeaderBoardTable
+            tableData={tableData}
+            contestDetails={contestDetails}
+          />
         </Paper>
       </Grid>
     </Grid>
@@ -32,7 +63,7 @@ function App() {
 
 export default App;
 
-const getLeaderBoard = (friendList, tableData, setTableData) => {
+const getFriendListLeaderBoard = (friendList, tableData, setTableData) => {
   const data = JSON.stringify({
     friends: Object.entries(friendList).map(([id]) => id),
   });
@@ -48,6 +79,35 @@ const getLeaderBoard = (friendList, tableData, setTableData) => {
 
   axios(config)
     .then(function ({ data: response }) {
+      if (!_.isEqual(tableData, response)) setTableData(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+const getGlobalLeaderBoard = (
+  globalPageNumber,
+  setGlobalPageCount,
+  tableData,
+  setTableData
+) => {
+  const config = {
+    method: 'get',
+    url: 'https://leetboard.herokuapp.com/global',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: {
+      page: globalPageNumber,
+    },
+  };
+
+  axios(config)
+    .then(function ({ data }) {
+      const { globalRankList: response, contestantCount } = data;
+      const pageCount = Math.ceil(contestantCount / 50);
+      setGlobalPageCount(pageCount);
       if (!_.isEqual(tableData, response)) setTableData(response);
     })
     .catch(function (error) {
