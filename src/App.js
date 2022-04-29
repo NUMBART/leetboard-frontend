@@ -1,6 +1,6 @@
 import './App.css';
 import { Grid, Paper } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 import { LeaderBoardTable } from './components/LeaderBoardTable';
@@ -35,8 +35,14 @@ function App() {
         setTableData
       ),
   };
-  getContest(contestDetails, setContestDetails);
-  getLeaderBoard[boardType]();
+  useEffect(() => {
+    getLeaderBoard[boardType]();
+  }, [boardType, globalPageNumber, friendList]);
+
+  useEffect(() => {
+    getContest(contestDetails, setContestDetails);
+  }, []);
+
   return (
     <Grid className='App'>
       <Grid>

@@ -16,26 +16,26 @@ export function LeaderBoardTable({ tableData, contestDetails }) {
       <Table aria-label='simple table'>
         <TableHead>
           <TableRow>
-            <TableCell>Rank</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Score</TableCell>
-            <TableCell>Finish Time</TableCell>
-            <TableCell>Q1</TableCell>
-            <TableCell>Q2</TableCell>
-            <TableCell>Q3</TableCell>
-            <TableCell>Q4</TableCell>
+            <TableCell key='Rank'>Rank</TableCell>
+            <TableCell key='Name'>Name</TableCell>
+            <TableCell key='Score'>Score</TableCell>
+            <TableCell key='Finish Time'>Finish Time</TableCell>
+            <TableCell key='Q1'>Q1</TableCell>
+            <TableCell key='Q2'>Q2</TableCell>
+            <TableCell key='Q3'>Q3</TableCell>
+            <TableCell key='Q4'>Q4</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableData.map((row) => (
+          {tableData.map((row, index) => (
             <TableRow
-              key={row.id}
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell>{row.rank}</TableCell>
-              <TableCell>{row.username}</TableCell>
-              <TableCell>{row.score}</TableCell>
-              <TableCell>
+              <TableCell key='rank'>{row.rank}</TableCell>
+              <TableCell key='username'>{row.username}</TableCell>
+              <TableCell key='score'>{row.score}</TableCell>
+              <TableCell key='finish_time'>
                 {getDuration(row.finish_time, contestDetails.startTime)}
               </TableCell>
               {Object.entries(row.submissions).map(([id, submission]) => {
