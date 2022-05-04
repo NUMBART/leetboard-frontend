@@ -6,8 +6,13 @@ import {
   ToggleButtonGroup,
   ToggleButton,
   Pagination,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from '@mui/material';
 import React from 'react';
+import { countries } from './Countries';
 
 export function InputPanel({
   friendList,
@@ -17,6 +22,11 @@ export function InputPanel({
   globalPageNumber,
   setGlobalPageNumber,
   globalPageCount,
+  country,
+  setCountry,
+  countryPageNumber,
+  setCountryPageNumber,
+  countryPageCount,
 }) {
   const inputHandler = {
     friends: (
@@ -27,6 +37,15 @@ export function InputPanel({
         globalPageNumber={globalPageNumber}
         setGlobalPageNumber={setGlobalPageNumber}
         globalPageCount={globalPageCount}
+      />
+    ),
+    country: (
+      <CountryInputPanel
+        country={country}
+        setCountry={setCountry}
+        countryPageNumber={countryPageNumber}
+        setCountryPageNumber={setCountryPageNumber}
+        countryPageCount={countryPageCount}
       />
     ),
   };
@@ -63,9 +82,9 @@ function BoardTypeToggle({ boardType, setBoardType }) {
         <ToggleButton value='friends' aria-label='italic'>
           Friends
         </ToggleButton>
-        {/* <ToggleButton value='country' aria-label='underlined'>
+        <ToggleButton value='country' aria-label='underlined'>
           Country
-        </ToggleButton> */}
+        </ToggleButton>
       </ToggleButtonGroup>
     </Grid>
   );
@@ -89,6 +108,75 @@ function GlobalInputPanel({
         page={globalPageNumber}
         onChange={(e, pageNumber) => setGlobalPageNumber(pageNumber)}
       />
+    </Grid>
+  );
+}
+
+function CountryInputPanel({
+  country,
+  setCountry,
+  countryPageNumber,
+  setCountryPageNumber,
+  countryPageCount,
+}) {
+  return (
+    <Grid
+      sx={{
+        width: '60%',
+        display: 'flex',
+        justifyContent: 'space-around',
+      }}
+    >
+      <Grid
+        sx={{
+          width: '28%',
+          display: 'flex',
+          justifyContent: 'space-around',
+        }}
+      >
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id='country-select-label'>Country</InputLabel>
+          <Select
+            labelId='country-select-label'
+            id='country-select'
+            value={country}
+            label='Country'
+            onChange={(e) => {
+              setCountry(e.target.value);
+              setCountryPageNumber(1);
+            }}
+          >
+            <MenuItem id='None' value=''>
+              <em>None</em>
+            </MenuItem>
+            {countries.map((country) => (
+              <MenuItem id={country} value={country}>
+                {country}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid
+        sx={{
+          width: '44%',
+          display: 'flex',
+          justifyContent: 'space-around',
+        }}
+      >
+        <Pagination
+          count={countryPageCount}
+          page={countryPageNumber}
+          onChange={(e, pageNumber) => setCountryPageNumber(pageNumber)}
+        />
+      </Grid>
+      <Grid
+        sx={{
+          width: '28%',
+          display: 'flex',
+          justifyContent: 'space-around',
+        }}
+      ></Grid>
     </Grid>
   );
 }

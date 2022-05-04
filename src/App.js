@@ -17,6 +17,9 @@ function App() {
   const [boardType, setBoardType] = React.useState('global');
   const [globalPageNumber, setGlobalPageNumber] = React.useState(1);
   const [globalPageCount, setGlobalPageCount] = React.useState(1);
+  const [countryPageNumber, setCountryPageNumber] = React.useState(1);
+  const [countryPageCount, setCountryPageCount] = React.useState(1);
+  const [country, setCountry] = React.useState('None');
   const getLeaderBoard = {
     friends: () =>
       getFriendListLeaderBoard(friendList, tableData, setTableData),
@@ -28,16 +31,17 @@ function App() {
         setTableData
       ),
     country: () =>
-      getGlobalLeaderBoard(
-        globalPageNumber,
-        setGlobalPageCount,
+      getCountryLeaderBoard(
+        country,
+        countryPageNumber,
+        setCountryPageCount,
         tableData,
         setTableData
       ),
   };
   useEffect(() => {
     getLeaderBoard[boardType]();
-  }, [boardType, globalPageNumber, friendList]);
+  }, [boardType, globalPageNumber, countryPageNumber, country, friendList]);
 
   useEffect(() => {
     getContest(contestDetails, setContestDetails);
@@ -56,6 +60,11 @@ function App() {
             globalPageNumber={globalPageNumber}
             setGlobalPageNumber={setGlobalPageNumber}
             globalPageCount={globalPageCount}
+            country={country}
+            setCountry={setCountry}
+            countryPageNumber={countryPageNumber}
+            setCountryPageNumber={setCountryPageNumber}
+            countryPageCount={countryPageCount}
           />
           <LeaderBoardTable
             tableData={tableData}
@@ -118,6 +127,33 @@ const getGlobalLeaderBoard = (
     })
     .catch(function (error) {
       console.log(error);
+    });
+};
+
+const getCountryLeaderBoard = (
+  country,
+  countryPageNumber,
+  setCountryPageCount,
+  tableData,
+  setTableData
+) => {
+  const config = {
+    method: 'get',
+    url: 'https://leetboard-backend.herokuapp.com/country',
+    params: {
+      page: countryPageNumber,
+      country,
+    },
+  };
+  axios(config)
+    .then(({ data }) => {
+      const { countryRankList: response, contestantCount } = data;
+      const pageCount = Math.ceil(contestantCount / 50);
+      setCountryPageCount(pageCount);
+      if (!_.isEqual(tableData, response)) setTableData(response);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
 
