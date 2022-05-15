@@ -67,6 +67,8 @@ function App() {
             countryPageCount={countryPageCount}
           />
           <LeaderBoardTable
+            boardType={boardType}
+            countryPageNumber={countryPageNumber}
             tableData={tableData}
             contestDetails={contestDetails}
           />

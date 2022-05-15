@@ -10,12 +10,20 @@ import {
 import moment from 'moment';
 import React from 'react';
 
-export function LeaderBoardTable({ tableData, contestDetails }) {
+export function LeaderBoardTable({
+  tableData,
+  contestDetails,
+  boardType,
+  countryPageNumber,
+}) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label='simple table'>
         <TableHead>
           <TableRow>
+            {boardType === 'country' ? (
+              <TableCell key='Country Rank'>Country Rank</TableCell>
+            ) : null}
             <TableCell key='Rank'>Rank</TableCell>
             <TableCell key='Name'>Name</TableCell>
             <TableCell key='Score'>Score</TableCell>
@@ -32,6 +40,11 @@ export function LeaderBoardTable({ tableData, contestDetails }) {
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
+              {boardType === 'country' ? (
+                <TableCell key='country_rank'>
+                  {50 * (countryPageNumber - 1) + index + 1}
+                </TableCell>
+              ) : null}
               <TableCell key='rank'>{row.rank}</TableCell>
               <TableCell key='username'>{row.username}</TableCell>
               <TableCell key='score'>{row.score}</TableCell>
