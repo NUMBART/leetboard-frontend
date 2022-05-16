@@ -1,5 +1,5 @@
 import './App.css';
-import { Grid, Paper } from '@mui/material';
+import { Grid, Paper, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
@@ -7,7 +7,13 @@ import { LeaderBoardTable } from './components/LeaderBoardTable';
 import { InputPanel } from './components/InputPanel';
 
 function ContestTitle({ contestDetails }) {
-  return <Grid style={{ height: '10vh' }}>{contestDetails.title}</Grid>;
+  return (
+    <Grid style={{ height: '10vh' }}>
+      <Typography variant='h4' component='div' gutterBottom>
+        Ranking for {contestDetails.title}
+      </Typography>
+    </Grid>
+  );
 }
 
 function App() {
