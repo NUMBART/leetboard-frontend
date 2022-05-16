@@ -8,10 +8,32 @@ import { InputPanel } from './components/InputPanel';
 
 function ContestTitle({ contestDetails }) {
   return (
-    <Grid style={{ height: '10vh' }}>
-      <Typography variant='h4' component='div' gutterBottom>
-        Ranking for {contestDetails.title}
-      </Typography>
+    <Grid
+      sx={{ display: 'flex', justifyContent: 'space-around', height: '10vh' }}
+    >
+      <Grid sx={{ width: '10%' }}></Grid>
+      <Grid sx={{ width: '80%' }}>
+        <Typography variant='h4' component='div' gutterBottom>
+          Ranking for {contestDetails.title}
+        </Typography>
+      </Grid>
+      <Grid
+        sx={{
+          width: '10%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <iframe
+          src='https://ghbtns.com/github-btn.html?user=NUMBART&repo=leetboard&type=star&size=large'
+          frameborder='0'
+          scrolling='0'
+          width='170'
+          height='30'
+          title='GitHub'
+        ></iframe>
+      </Grid>
     </Grid>
   );
 }
