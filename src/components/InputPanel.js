@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { countries } from './Countries';
+import ReactGA from 'react-ga';
 
 export function InputPanel({
   friendList,
@@ -72,6 +73,10 @@ function BoardTypeToggle({ boardType, setBoardType }) {
         exclusive
         sx={{ height: '40px' }}
         onChange={(event, newType) => {
+          ReactGA.event({
+            category: 'User',
+            action: `Switched to ${newType} board`,
+          });
           setBoardType(newType);
         }}
         aria-label='text formatting'
@@ -142,6 +147,10 @@ function CountryInputPanel({
             value={country}
             label='Country'
             onChange={(e) => {
+              ReactGA.event({
+                category: 'User',
+                action: `Searched for country - ${e.target.value}`,
+              });
               setCountry(e.target.value);
               setCountryPageNumber(1);
             }}
@@ -217,6 +226,10 @@ function addFriend(event, friendList, setFriendList) {
     let newFriendList = { ...friendList };
     newFriendList[event.target.value] = event.target.value;
     event.target.value = '';
+    ReactGA.event({
+      category: 'User',
+      action: `Added ${newFriendList.length} friends`,
+    });
     setFriendList(newFriendList);
   }
 }

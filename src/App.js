@@ -5,6 +5,9 @@ import axios from 'axios';
 import _ from 'lodash';
 import { LeaderBoardTable } from './components/LeaderBoardTable';
 import { InputPanel } from './components/InputPanel';
+import ReactGA from 'react-ga';
+const TRACKING_ID = 'G-3ECBVRFPE2';
+ReactGA.initialize(TRACKING_ID);
 
 function ContestTitle({ contestDetails }) {
   return (
