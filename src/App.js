@@ -6,8 +6,6 @@ import _ from 'lodash';
 import { LeaderBoardTable } from './components/LeaderBoardTable';
 import { InputPanel } from './components/InputPanel';
 import ReactGA from 'react-ga';
-const TRACKING_ID = 'G-3ECBVRFPE2';
-ReactGA.initialize(TRACKING_ID);
 
 function ContestTitle({ contestDetails }) {
   return (
@@ -44,7 +42,9 @@ function ContestTitle({ contestDetails }) {
 function App() {
   const [tableData, setTableData] = React.useState([]);
   const [contestDetails, setContestDetails] = React.useState({ title: '' });
-  const [friendList, setFriendList] = React.useState({});
+  const [friendList, setFriendList] = React.useState(
+    JSON.parse(localStorage.getItem('friendList'))
+  );
   const [boardType, setBoardType] = React.useState('global');
   const [globalPageNumber, setGlobalPageNumber] = React.useState(1);
   const [globalPageCount, setGlobalPageCount] = React.useState(1);
@@ -70,6 +70,12 @@ function App() {
         setTableData
       ),
   };
+  useEffect(() => {
+    ReactGA.initialize('UA-229616335-1');
+    ReactGA.pageview('/');
+    console.log('initialised');
+  }, []);
+
   useEffect(() => {
     getLeaderBoard[boardType]();
   }, [boardType, globalPageNumber, countryPageNumber, country, friendList]);

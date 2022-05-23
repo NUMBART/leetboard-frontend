@@ -226,11 +226,12 @@ function addFriend(event, friendList, setFriendList) {
     let newFriendList = { ...friendList };
     newFriendList[event.target.value] = event.target.value;
     event.target.value = '';
+    setFriendList(newFriendList);
+    localStorage.setItem('friendList', JSON.stringify(newFriendList));
     ReactGA.event({
       category: 'User',
-      action: `Added ${newFriendList.length} friends`,
+      action: `Added ${Object.keys(newFriendList).length} friends`,
     });
-    setFriendList(newFriendList);
   }
 }
 
@@ -239,4 +240,5 @@ function removeFriend(friendName, friendList, setFriendList) {
   let newFriendList = { ...friendList };
   delete newFriendList[friendName];
   setFriendList(newFriendList);
+  localStorage.setItem('friendList', JSON.stringify(newFriendList));
 }
