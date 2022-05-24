@@ -73,11 +73,13 @@ function BoardTypeToggle({ boardType, setBoardType }) {
         exclusive
         sx={{ height: '40px' }}
         onChange={(event, newType) => {
-          ReactGA.event({
-            category: 'User',
-            action: `Switched to ${newType} board`,
-          });
-          setBoardType(newType);
+          if (newType != null) {
+            ReactGA.event({
+              category: 'User',
+              action: `Switched to ${newType} board`,
+            });
+            setBoardType(newType);
+          }
         }}
         aria-label='text formatting'
       >
