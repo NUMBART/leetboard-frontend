@@ -92,11 +92,9 @@ const ResponsiveAppBar = () => {
             >
               {pages.map((page) => (
                 <RouterLink to={page} style={{ textDecoration: 'none' }}>
-                  <Tooltip key={page} title={`${page} (Coming Soon)`}>
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography textAlign='center'>{page}</Typography>
-                    </MenuItem>
-                  </Tooltip>
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign='center'>{page}</Typography>
+                  </MenuItem>
                 </RouterLink>
               ))}
             </Menu>
@@ -122,17 +120,15 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Tooltip key={page} title={`${page} (Coming Soon)`}>
-                <RouterLink to={page} style={{ textDecoration: 'none' }}>
-                  <Button
-                    key={page}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                    {page}
-                  </Button>
-                </RouterLink>
-              </Tooltip>
+              <RouterLink to={page} style={{ textDecoration: 'none' }}>
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {page}
+                </Button>
+              </RouterLink>
             ))}
           </Box>
 
