@@ -8,6 +8,8 @@ import {
   TableCell,
 } from '@mui/material';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBug } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
 export function LeaderBoardTable({
@@ -56,7 +58,15 @@ export function LeaderBoardTable({
                   submission.date,
                   contestDetails.startTime
                 );
-                return <TableCell key={id}>{duration}</TableCell>;
+                let subTime = submission.fail_count ? (
+                  <div>
+                    {duration} <FontAwesomeIcon icon={faBug} color='crimson' />{' '}
+                    {submission.fail_count}
+                  </div>
+                ) : (
+                  duration
+                );
+                return <TableCell key={id}>{subTime}</TableCell>;
               })}
             </TableRow>
           ))}
