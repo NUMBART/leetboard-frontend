@@ -12,7 +12,7 @@ export const getFriendListLeaderBoard = (
 
   const config = {
     method: 'post',
-    url: 'https://leetboard-backend.herokuapp.com/friends',
+    url: `https://leetboardbe-subhrangshupandeyhit.b4a.run/friends`,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -35,7 +35,7 @@ export const getGlobalLeaderBoard = (
 ) => {
   const config = {
     method: 'get',
-    url: 'https://leetboard-backend.herokuapp.com/global',
+    url: `https://leetboardbe-subhrangshupandeyhit.b4a.run/global`,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -64,7 +64,7 @@ export const getCountryLeaderBoard = (
 ) => {
   const config = {
     method: 'get',
-    url: 'https://leetboard-backend.herokuapp.com/country',
+    url: `https://leetboardbe-subhrangshupandeyhit.b4a.run/country`,
     params: {
       page: countryPageNumber,
       country,
@@ -92,7 +92,7 @@ export const getFriendListRatingLeaderBoard = (
 
   const config = {
     method: 'post',
-    url: 'https://leetboard-backend.herokuapp.com/rating/friends',
+    url: `https://leetboardbe-subhrangshupandeyhit.b4a.run/rating/friends`,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -115,7 +115,7 @@ export const getGlobalRatingLeaderBoard = (
 ) => {
   const config = {
     method: 'get',
-    url: 'https://leetboard-backend.herokuapp.com/rating/global',
+    url: `https://leetboardbe-subhrangshupandeyhit.b4a.run/rating/global`,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -144,7 +144,7 @@ export const getCountryRatingLeaderBoard = (
 ) => {
   const config = {
     method: 'get',
-    url: 'https://leetboard-backend.herokuapp.com/rating/country',
+    url: `https://leetboardbe-subhrangshupandeyhit.b4a.run/rating/country`,
     params: {
       page: countryPageNumber,
       country,
@@ -164,7 +164,7 @@ export const getCountryRatingLeaderBoard = (
 export const getContest = (contestDetails, setContestDetails) => {
   var config = {
     method: 'get',
-    url: 'https://leetboard-backend.herokuapp.com/contest',
+    url: `https://leetboardbe-subhrangshupandeyhit.b4a.run/contest`,
   };
 
   axios(config)
