@@ -20,5 +20,6 @@ RUN npm run build
 FROM node:16-alpine
 COPY --from=build-stage /app/build/ /app/build
 RUN npm i -g serve
+EXPOSE 3000
 # start app
 CMD serve -s /app/build -l 3000
