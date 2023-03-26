@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Link as RouterLink } from 'react-router-dom';
 import LeetBoardLogo from './LeetBoardLogo';
 
-const pages = ['contest', 'rating'];
+const pages = ['contest', 'rating', 'daily'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
