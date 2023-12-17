@@ -8,15 +8,15 @@ import RatingPage from './RatingPage';
 function LeetcodeDailyRedirect() {
   const requestOptions = {
     method: 'get',
-    url: 'https://leetboardbe-subhrangshupandeyhit.b4a.run/daily-challenge',
+    url: 'https://x0fbzv2ig8.execute-api.ap-south-1.amazonaws.com/production/lc-daily',
   };
 
   axios(requestOptions)
     .then((result) => {
       console.log('daily challenge : ', result);
       setTimeout(() => {
-        window.location.replace(result.data.link);
-      }, 2000);
+        window.location.replace(result.data.mylink);
+      }, 1500);
     })
     .catch((err) => {
       console.log('error while fetching daily challenge: ', err);
@@ -24,11 +24,10 @@ function LeetcodeDailyRedirect() {
 
   return (
     <Grid className='App'>
-      <Grid sx={{ width: '100%', height: '10vh' }}>
+      <Grid sx={{ width: '100%', height: '10vh', paddingTop: '10%' }}>
         <Typography variant='h4' component='div' gutterBottom>
-          The Person who goes to the gym regardless of how they feel will always
-          beat the person who goes to the gym when they feel like going to the
-          gym.
+          Nobody cares what you did yesterday. What have you done today to
+          better yourself?
         </Typography>
       </Grid>
     </Grid>
